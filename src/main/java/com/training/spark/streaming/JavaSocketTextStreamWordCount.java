@@ -1,5 +1,9 @@
 package com.training.spark.streaming;
 
+import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.io.Text;
+import org.apache.hadoop.mapred.SequenceFileOutputFormat;
+import org.apache.hadoop.mapred.TextOutputFormat;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.function.FlatMapFunction;
 import org.apache.spark.api.java.function.Function2;
@@ -57,7 +61,9 @@ public class JavaSocketTextStreamWordCount {
             }
         });
 
-        wordCounts.print();
+       wordCounts.print();
+
+        //wordCounts.saveAsHadoopFiles("hdfs://localhost:8020/user/nagi/spark/" ,"textstream",Text.class, IntWritable.class, TextOutputFormat.class);
 
         ssc.start();
 
