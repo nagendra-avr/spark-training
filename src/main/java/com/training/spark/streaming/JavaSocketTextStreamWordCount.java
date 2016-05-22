@@ -63,7 +63,7 @@ public class JavaSocketTextStreamWordCount {
 
        wordCounts.print();
 
-        //wordCounts.saveAsHadoopFiles("hdfs://localhost:8020/user/nagi/spark/" ,"textstream",Text.class, IntWritable.class, TextOutputFormat.class);
+        //wordCounts.saveAsHadoopFiles(args[2] ,"socketstream",Text.class, IntWritable.class, TextOutputFormat.class);
 
         ssc.start();
 

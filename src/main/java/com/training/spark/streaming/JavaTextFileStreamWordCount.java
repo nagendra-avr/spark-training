@@ -27,7 +27,7 @@ public class JavaTextFileStreamWordCount {
     public static void main(String[] args) {
 
         if (args.length < 1) {
-            System.err.println("Usage: JavaTextFileStreamWordCount <directoryName>");
+            System.err.println("Usage: JavaTextFileStreamWordCount <directoryName> <hdfspath>");
             System.exit(1);
         }
 
@@ -63,7 +63,7 @@ public class JavaTextFileStreamWordCount {
 
         wordCounts.print();
 
-        //wordCounts.saveAsHadoopFiles("hdfs://localhost:8020/user/nagi/spark/" ,"textstream",Text.class, IntWritable.class, TextOutputFormat.class);
+        //wordCounts.saveAsHadoopFiles(args[1] ,"textstream",Text.class, IntWritable.class, TextOutputFormat.class);
 
         ssc.start();
 
