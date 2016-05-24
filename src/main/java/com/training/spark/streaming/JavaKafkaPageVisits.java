@@ -3,6 +3,8 @@ package com.training.spark.streaming;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.function.FlatMapFunction;
 import org.apache.spark.api.java.function.Function;
+import org.apache.spark.api.java.function.Function2;
+import org.apache.spark.api.java.function.PairFunction;
 import org.apache.spark.streaming.Durations;
 import org.apache.spark.streaming.api.java.JavaDStream;
 import org.apache.spark.streaming.api.java.JavaPairReceiverInputDStream;
@@ -28,7 +30,7 @@ public class JavaKafkaPageVisits {
         }
 
         SparkConf sparkConf = new SparkConf().setAppName("JavaTextFileStreamWordCount").setMaster("local[3]");
-        JavaStreamingContext jssc = new JavaStreamingContext(sparkConf, Durations.seconds(5));
+        JavaStreamingContext jssc = new JavaStreamingContext(sparkConf, Durations.seconds(2));
 
         int numThreads = Integer.parseInt(args[3]);
         Map<String, Integer> topicMap = new HashMap<String, Integer>();
@@ -72,7 +74,9 @@ public class JavaKafkaPageVisits {
             }
         });
 
-        filteredVisits.print();
+        JavaDStream<PageVisits> windowStream2 = filteredVisits.window(Durations.seconds(4), Durations.seconds(2));
+
+        windowStream2.print();
 
         jssc.start();
 
