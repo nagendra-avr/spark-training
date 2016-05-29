@@ -42,6 +42,12 @@ object ScalaSqlParquetRead {
     //Group By id
      parquetdf.groupBy(parquetdf("id")).count().show()
 
+    parquetdf.filter(parquetdf("id").equalTo("12358080") || parquetdf("id").equalTo("12358080")).show()
+    parquetdf.where(parquetdf("id").equalTo("12358080") ||parquetdf("id").equalTo("12358080")).show()
+
+    //parquetdf.filter($"id"==="12140913" || $"id"==="14315350").show()
+    //parquetdf.where($"id"==="12140913" || $"id"==="14315350").show()
+    //parquetdf.where(wikidata("id")==="12140913" || wikidata("id")==="14315350").show()
 
     //Default 20 rows
     parquetdf.show();
